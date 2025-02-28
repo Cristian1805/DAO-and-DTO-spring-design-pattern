@@ -55,7 +55,7 @@ public class UserServicesImpl implements IUserService {
     @Override
     public UserDTO updateUser(Long id, UserDTO userDTO) {
 
-        /*
+
         Optional<UserEntity> userEntity = this.userDAO.findById(id);
 
 
@@ -74,21 +74,21 @@ public class UserServicesImpl implements IUserService {
         } else {
             throw new IllegalArgumentException("Usuario no encontrado");
         }
-    } */
-        return userDTO;
     }
 
+
     @Override
-    public void deleteUser(Long id) {
+    public String deleteUser(Long id) {
 
         Optional<UserEntity> userEntity = this.userDAO.findById(id);
 
         if(userEntity.isPresent()){
-            this.userDAO.deleteUser(userEntity.get());
+            UserEntity currenUserEntity = userEntity.get();
+            this.userDAO.deleteUser(currenUserEntity);
+            return "Usuario eliminado";
 
         } else {
             throw new IllegalArgumentException("Usuario no encontrado");
         }
-
     }
 }
